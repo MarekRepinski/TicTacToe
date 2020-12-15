@@ -15,6 +15,7 @@
 		D54390D72588F4D2006742E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54390D52588F4D2006742E7 /* LaunchScreen.storyboard */; };
 		D54390E22588F4D3006742E7 /* TicTacToeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54390E12588F4D3006742E7 /* TicTacToeTests.swift */; };
 		D54390ED2588F4D3006742E7 /* TicTacToeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54390EC2588F4D3006742E7 /* TicTacToeUITests.swift */; };
+		D54390FE25890106006742E7 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54390FD25890106006742E7 /* TicTacToeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		D54390E82588F4D3006742E7 /* TicTacToeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D54390EC2588F4D3006742E7 /* TicTacToeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeUITests.swift; sourceTree = "<group>"; };
 		D54390EE2588F4D3006742E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D54390FD25890106006742E7 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				D54390D32588F4D2006742E7 /* Assets.xcassets */,
 				D54390D52588F4D2006742E7 /* LaunchScreen.storyboard */,
 				D54390D82588F4D2006742E7 /* Info.plist */,
+				D54390FD25890106006742E7 /* TicTacToeViewController.swift */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				D54390CF2588F4CF006742E7 /* ViewController.swift in Sources */,
 				D54390CB2588F4CF006742E7 /* AppDelegate.swift in Sources */,
 				D54390CD2588F4CF006742E7 /* SceneDelegate.swift in Sources */,
+				D54390FE25890106006742E7 /* TicTacToeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

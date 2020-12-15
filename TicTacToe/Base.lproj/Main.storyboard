@@ -1,24 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOS-Vd-ukz">
+                                <rect key="frame" x="138" y="518" width="138" height="51"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <state key="normal" title="1 - Player"/>
+                                <connections>
+                                    <action selector="onePlayer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KnF-bE-4fR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6g-OJ-bna">
+                                <rect key="frame" x="136" y="609" width="142" height="51"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <state key="normal" title="2 - Player"/>
+                                <connections>
+                                    <action selector="twoPlayer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="23o-h5-JBk"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic Tac Toe" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtu-cD-fU6">
+                                <rect key="frame" x="117" y="168" width="180" height="260"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="9Cv-03-EN2"/>
+                                    <constraint firstAttribute="height" constant="260" id="VeH-O3-f5i"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="64"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <constraints>
+                            <constraint firstItem="vtu-cD-fU6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VBY-5O-OU4"/>
+                            <constraint firstItem="vtu-cD-fU6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="124" id="XUK-IW-m4p"/>
+                            <constraint firstItem="oOS-Vd-ukz" firstAttribute="top" secondItem="vtu-cD-fU6" secondAttribute="bottom" constant="90" id="cBi-iP-4YO"/>
+                            <constraint firstItem="S6g-OJ-bna" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hMv-dw-4VD"/>
+                            <constraint firstItem="S6g-OJ-bna" firstAttribute="top" secondItem="oOS-Vd-ukz" secondAttribute="bottom" constant="40" id="re0-Ug-Xd8"/>
+                            <constraint firstItem="oOS-Vd-ukz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xsx-0p-xgM"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <segue destination="t3S-Dm-Gpo" kind="presentation" identifier="segueToGameTwoP" modalPresentationStyle="overFullScreen" id="EIY-0T-SjK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="10" y="-11"/>
+        </scene>
+        <!--Tic Tac Toe View Controller-->
+        <scene sceneID="T0F-LY-Z38">
+            <objects>
+                <viewController id="t3S-Dm-Gpo" customClass="TicTacToeViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8M2-kG-OUG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szo-mb-ni4">
+                                <rect key="frame" x="179" y="791" width="56" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="t9e-Hh-FDR" kind="unwind" unwindAction="unwindToStartViewWithSegue:" id="3H3-ab-Bsh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="upK-2T-foa"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="upK-2T-foa" firstAttribute="bottom" secondItem="szo-mb-ni4" secondAttribute="bottom" constant="30" id="SKs-o9-sT1"/>
+                            <constraint firstItem="szo-mb-ni4" firstAttribute="centerX" secondItem="8M2-kG-OUG" secondAttribute="centerX" id="rGA-Ad-aQp"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2kr-hl-TwZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="t9e-Hh-FDR" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="875" y="-11"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
