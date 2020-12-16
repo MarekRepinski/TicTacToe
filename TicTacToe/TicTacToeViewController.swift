@@ -138,8 +138,9 @@ class TicTacToeViewController: UIViewController {
             if blinkCnt >= 10 {
                 timer?.invalidate()
                 blinkCnt = 0
+            } else {
+                blinkStatus = true
             }
-            blinkStatus = true
         }
     }
     
