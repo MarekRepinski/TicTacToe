@@ -78,22 +78,162 @@
                                     <segue destination="t9e-Hh-FDR" kind="unwind" unwindAction="unwindToStartViewWithSegue:" id="3H3-ab-Bsh"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="o" translatesAutoresizingMaskIntoConstraints="NO" id="l1v-6s-SIr">
+                                <rect key="frame" x="75" y="320" width="70" height="70"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="vaY-fi-8uz" appends="YES" id="yiD-JD-DOA"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="vpO-dd-pKh">
+                                <rect key="frame" x="170" y="320" width="70" height="70"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="yji-Pr-99J" appends="YES" id="Y2X-Bv-En4"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="x" translatesAutoresizingMaskIntoConstraints="NO" id="e9O-Iw-w4c">
+                                <rect key="frame" x="265" y="320" width="70" height="70"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="tEY-EY-isL" appends="YES" id="8ud-Rn-AKv"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="xGi-WA-rRv">
+                                <rect key="frame" x="75" y="415" width="70" height="70"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="yC8-lo-p1p" appends="YES" id="fSo-jq-CmO"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="Hd7-Cq-1lg">
+                                <rect key="frame" x="170" y="415" width="70" height="70"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="LHt-n8-2E0" appends="YES" id="6eZ-qW-4kh"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="O4i-FA-eQ1">
+                                <rect key="frame" x="265" y="415" width="70" height="70"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="5QK-SK-dgW" appends="YES" id="ttE-rf-l4g"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="EI6-Rl-3h1">
+                                <rect key="frame" x="75" y="510" width="70" height="70"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="lkd-sy-QW8" appends="YES" id="Iig-c7-UAW"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="jA4-6x-snq">
+                                <rect key="frame" x="170" y="510" width="70" height="70"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="h6g-gV-9fk" appends="YES" id="rDJ-1W-GN7"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="nfb-jh-sbO">
+                                <rect key="frame" x="265" y="510" width="70" height="70"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="gVk-fi-orx" appends="YES" id="n1g-sX-J8b"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="upK-2T-foa"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.59601920105747341" green="0.57309538563218598" blue="0.57309538563218598" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="xGi-WA-rRv" firstAttribute="leading" secondItem="upK-2T-foa" secondAttribute="leading" constant="75" id="3a3-Y6-c0x"/>
+                            <constraint firstItem="Hd7-Cq-1lg" firstAttribute="leading" secondItem="xGi-WA-rRv" secondAttribute="trailing" constant="25" id="48h-Cp-8rI"/>
+                            <constraint firstItem="vpO-dd-pKh" firstAttribute="top" secondItem="upK-2T-foa" secondAttribute="top" constant="276" id="6CC-DJ-ufg"/>
+                            <constraint firstItem="O4i-FA-eQ1" firstAttribute="leading" secondItem="Hd7-Cq-1lg" secondAttribute="trailing" constant="25" id="Hbq-PJ-1cU"/>
+                            <constraint firstItem="nfb-jh-sbO" firstAttribute="top" secondItem="O4i-FA-eQ1" secondAttribute="bottom" constant="25" id="Htx-nu-Hez"/>
+                            <constraint firstItem="EI6-Rl-3h1" firstAttribute="leading" secondItem="upK-2T-foa" secondAttribute="leading" constant="75" id="LtW-lV-W21"/>
+                            <constraint firstItem="e9O-Iw-w4c" firstAttribute="top" secondItem="upK-2T-foa" secondAttribute="top" constant="276" id="N4T-7K-WT9"/>
+                            <constraint firstItem="vpO-dd-pKh" firstAttribute="leading" secondItem="l1v-6s-SIr" secondAttribute="trailing" constant="25" id="QWs-FS-da7"/>
                             <constraint firstItem="upK-2T-foa" firstAttribute="bottom" secondItem="szo-mb-ni4" secondAttribute="bottom" constant="30" id="SKs-o9-sT1"/>
+                            <constraint firstItem="EI6-Rl-3h1" firstAttribute="top" secondItem="xGi-WA-rRv" secondAttribute="bottom" constant="25" id="TgP-Ri-TAI"/>
+                            <constraint firstItem="l1v-6s-SIr" firstAttribute="top" secondItem="upK-2T-foa" secondAttribute="top" constant="276" id="XBy-rV-OE3"/>
+                            <constraint firstItem="jA4-6x-snq" firstAttribute="top" secondItem="Hd7-Cq-1lg" secondAttribute="bottom" constant="25" id="ZJN-on-0YT"/>
+                            <constraint firstItem="Hd7-Cq-1lg" firstAttribute="top" secondItem="vpO-dd-pKh" secondAttribute="bottom" constant="25" id="esA-Qf-CIQ"/>
+                            <constraint firstItem="O4i-FA-eQ1" firstAttribute="top" secondItem="e9O-Iw-w4c" secondAttribute="bottom" constant="25" id="jCB-h3-qX6"/>
+                            <constraint firstItem="jA4-6x-snq" firstAttribute="leading" secondItem="EI6-Rl-3h1" secondAttribute="trailing" constant="25" id="qCh-Et-zTU"/>
                             <constraint firstItem="szo-mb-ni4" firstAttribute="centerX" secondItem="8M2-kG-OUG" secondAttribute="centerX" id="rGA-Ad-aQp"/>
+                            <constraint firstItem="xGi-WA-rRv" firstAttribute="top" secondItem="l1v-6s-SIr" secondAttribute="bottom" constant="25" id="rL2-LO-kpB"/>
+                            <constraint firstItem="e9O-Iw-w4c" firstAttribute="leading" secondItem="vpO-dd-pKh" secondAttribute="trailing" constant="25" id="vjz-kM-3MG"/>
+                            <constraint firstItem="nfb-jh-sbO" firstAttribute="leading" secondItem="jA4-6x-snq" secondAttribute="trailing" constant="25" id="x0j-87-P9B"/>
+                            <constraint firstItem="l1v-6s-SIr" firstAttribute="leading" secondItem="upK-2T-foa" secondAttribute="leading" constant="75" id="y79-uT-mLj"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="img11" destination="l1v-6s-SIr" id="Vh2-6j-qT6"/>
+                        <outlet property="img12" destination="vpO-dd-pKh" id="Kfi-Np-WtX"/>
+                        <outlet property="img13" destination="e9O-Iw-w4c" id="Iis-ON-hA5"/>
+                        <outlet property="img21" destination="xGi-WA-rRv" id="Stw-Ws-xl3"/>
+                        <outlet property="img22" destination="Hd7-Cq-1lg" id="mL5-yl-veg"/>
+                        <outlet property="img23" destination="O4i-FA-eQ1" id="8CJ-lL-7HJ"/>
+                        <outlet property="img31" destination="EI6-Rl-3h1" id="whq-in-UNz"/>
+                        <outlet property="img32" destination="jA4-6x-snq" id="Uid-x1-ina"/>
+                        <outlet property="img33" destination="nfb-jh-sbO" id="tEv-ql-bZW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2kr-hl-TwZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="t9e-Hh-FDR" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="vaY-fi-8uz" userLabel="Tap11 Gesture Recognizer">
+                    <connections>
+                        <action selector="tapp11:" destination="t3S-Dm-Gpo" id="0gP-9q-vOK"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="yji-Pr-99J" userLabel="Tap12 Gesture Recognizer">
+                    <connections>
+                        <action selector="tapp12:" destination="t3S-Dm-Gpo" id="VYO-T9-f8v"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="tEY-EY-isL" userLabel="Tap13 Gesture Recognizer">
+                    <connections>
+                        <action selector="tapp13:" destination="t3S-Dm-Gpo" id="9kG-8J-Zuc"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="yC8-lo-p1p" userLabel="Tap21 Gesture Recognizer">
+                    <connections>
+                        <action selector="tapp21:" destination="t3S-Dm-Gpo" id="Dfl-bU-e7p"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="LHt-n8-2E0" userLabel="Tap22 Gesture Recognizer">
+                    <connections>
+                        <action selector="tapp22:" destination="t3S-Dm-Gpo" id="2p7-FD-EKf"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="5QK-SK-dgW" userLabel="Tap23 Gesture Recognizer">
+                    <connections>
+                        <action selector="tapp23:" destination="t3S-Dm-Gpo" id="LcO-dG-IB9"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="lkd-sy-QW8" userLabel="Tap31 Gesture Recognizer">
+                    <connections>
+                        <action selector="tapp31:" destination="t3S-Dm-Gpo" id="QSU-EJ-xtY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="h6g-gV-9fk" userLabel="Tap32 Gesture Recognizer">
+                    <connections>
+                        <action selector="tapp32:" destination="t3S-Dm-Gpo" id="XYA-sb-ntk"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="gVk-fi-orx" userLabel="Tap33 Gesture Recognizer">
+                    <connections>
+                        <action selector="tapp33:" destination="t3S-Dm-Gpo" id="3AF-4M-Mwf"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="875" y="-11"/>
+            <point key="canvasLocation" x="873.91304347826099" y="-11.383928571428571"/>
         </scene>
     </scenes>
     <resources>
+        <image name="blank" width="70" height="70"/>
+        <image name="o" width="70" height="70"/>
+        <image name="x" width="70" height="70"/>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
