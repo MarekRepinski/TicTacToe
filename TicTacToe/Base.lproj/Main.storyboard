@@ -141,6 +141,12 @@
                                     <outletCollection property="gestureRecognizers" destination="gVk-fi-orx" appends="YES" id="n1g-sX-J8b"/>
                                 </connections>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LC-5u-yOk">
+                                <rect key="frame" x="188.5" y="114" width="37.5" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="upK-2T-foa"/>
                         <color key="backgroundColor" red="0.59601920105747341" green="0.57309538563218598" blue="0.57309538563218598" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -150,9 +156,11 @@
                             <constraint firstItem="vpO-dd-pKh" firstAttribute="top" secondItem="upK-2T-foa" secondAttribute="top" constant="276" id="6CC-DJ-ufg"/>
                             <constraint firstItem="O4i-FA-eQ1" firstAttribute="leading" secondItem="Hd7-Cq-1lg" secondAttribute="trailing" constant="25" id="Hbq-PJ-1cU"/>
                             <constraint firstItem="nfb-jh-sbO" firstAttribute="top" secondItem="O4i-FA-eQ1" secondAttribute="bottom" constant="25" id="Htx-nu-Hez"/>
+                            <constraint firstItem="2LC-5u-yOk" firstAttribute="centerX" secondItem="8M2-kG-OUG" secondAttribute="centerX" id="Jkr-1r-0AS"/>
                             <constraint firstItem="EI6-Rl-3h1" firstAttribute="leading" secondItem="upK-2T-foa" secondAttribute="leading" constant="75" id="LtW-lV-W21"/>
                             <constraint firstItem="e9O-Iw-w4c" firstAttribute="top" secondItem="upK-2T-foa" secondAttribute="top" constant="276" id="N4T-7K-WT9"/>
                             <constraint firstItem="vpO-dd-pKh" firstAttribute="leading" secondItem="l1v-6s-SIr" secondAttribute="trailing" constant="25" id="QWs-FS-da7"/>
+                            <constraint firstItem="2LC-5u-yOk" firstAttribute="top" secondItem="upK-2T-foa" secondAttribute="top" constant="70" id="Rlr-LC-csQ"/>
                             <constraint firstItem="upK-2T-foa" firstAttribute="bottom" secondItem="szo-mb-ni4" secondAttribute="bottom" constant="30" id="SKs-o9-sT1"/>
                             <constraint firstItem="EI6-Rl-3h1" firstAttribute="top" secondItem="xGi-WA-rRv" secondAttribute="bottom" constant="25" id="TgP-Ri-TAI"/>
                             <constraint firstItem="l1v-6s-SIr" firstAttribute="top" secondItem="upK-2T-foa" secondAttribute="top" constant="276" id="XBy-rV-OE3"/>
@@ -177,6 +185,7 @@
                         <outlet property="img31" destination="EI6-Rl-3h1" id="whq-in-UNz"/>
                         <outlet property="img32" destination="jA4-6x-snq" id="Uid-x1-ina"/>
                         <outlet property="img33" destination="nfb-jh-sbO" id="tEv-ql-bZW"/>
+                        <outlet property="reslabel" destination="2LC-5u-yOk" id="KfK-gC-AgJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2kr-hl-TwZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
