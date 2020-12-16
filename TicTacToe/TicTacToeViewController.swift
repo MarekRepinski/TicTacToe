@@ -24,6 +24,9 @@ class TicTacToeViewController: UIViewController {
     @IBOutlet weak var reslabel: UILabel!
     var cordMap = [[UIImageView]]()
     var theGame = TicTackToeGame()
+    var timer: Timer?
+    var blinkCnt = 0
+    var blinkStatus = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +35,6 @@ class TicTacToeViewController: UIViewController {
         let theGame = TicTackToeGame()
         theGame.startNewGame()
         reslabel.text = ""
-
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func tapp11(_ sender: UITapGestureRecognizer) {
@@ -117,7 +118,28 @@ class TicTacToeViewController: UIViewController {
         if winningLine[0].x == -1 {
             reslabel.text = "Game ended with a Draw"
         } else {
-            reslabel.text = "\(winner)- Won!! Winning line \(winningLine)"
+            reslabel.text = "\(winner)- Won!!"
+            timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: blink(t:))
+        }
+    }
+    
+    func blink(t: Timer? = nil){
+        blinkCnt += 1
+        for wl in theGame.winningLine {
+            if blinkStatus {
+                cordMap[wl.y][wl.x].isHidden = true
+            } else {
+                cordMap[wl.y][wl.x].isHidden = false
+            }
+        }
+        if blinkStatus {
+            blinkStatus = false
+        } else {
+            if blinkCnt >= 10 {
+                timer?.invalidate()
+                blinkCnt = 0
+            }
+            blinkStatus = true
         }
     }
     
@@ -127,5 +149,9 @@ class TicTacToeViewController: UIViewController {
                 cordMap[y][x].image = blankImg
             }
         }
+    }
+
+    deinit {
+        timer?.invalidate()
     }
 }
