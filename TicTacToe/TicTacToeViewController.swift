@@ -21,12 +21,17 @@ class TicTacToeViewController: UIViewController {
     @IBOutlet weak var img31: UIImageView!
     @IBOutlet weak var img32: UIImageView!
     @IBOutlet weak var img33: UIImageView!
+    @IBOutlet weak var reslabel: UILabel!
     var cordMap = [[UIImageView]]()
+    var theGame = TicTackToeGame()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         cordMap = [[img11, img12, img13], [img21, img22, img23], [img31, img32, img33]]
         clearPlayField()
+        let theGame = TicTackToeGame()
+        theGame.startNewGame()
+        reslabel.text = ""
 
         // Do any additional setup after loading the view.
     }
@@ -92,10 +97,27 @@ class TicTacToeViewController: UIViewController {
     }
     
     func imageTapped(y: Int, x: Int){
-        if (y + x) % 2 == 0 {
-            cordMap[y][x].image = xImg
+        if !theGame.endGame {
+            if theGame.nextMoveX(y: y, x: x) {
+                cordMap[y][x].image = xImg
+                if theGame.endGame {
+                    gameEnded(winner: "X")
+                }
+            } else {
+                cordMap[y][x].image = oImg
+                if theGame.endGame {
+                    gameEnded(winner: "O")
+                }
+            }
+        }
+    }
+    
+    func gameEnded(winner: String){
+        let winningLine = theGame.winningLine
+        if winningLine[0].x == -1 {
+            reslabel.text = "Game ended with a Draw"
         } else {
-            cordMap[y][x].image = oImg
+            reslabel.text = "\(winner)- Won!! Winning line \(winningLine)"
         }
     }
     
