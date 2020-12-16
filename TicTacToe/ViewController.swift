@@ -18,10 +18,12 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onePlayer(_ sender: UIButton) {
+        noOfPlayers = 1
         performSegue(withIdentifier: segueToGameOneP, sender: self)
     }
     
     @IBAction func twoPlayer(_ sender: UIButton) {
+        noOfPlayers = 2
         performSegue(withIdentifier: segueToGameTwoP, sender: self)
     }
     
