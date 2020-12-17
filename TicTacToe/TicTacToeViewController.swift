@@ -34,6 +34,12 @@ class TicTacToeViewController: UIViewController {
     var cordMap = [[UIImageView]]()
     var theGame = TicTackToeGame()
     var timer: Timer?
+    var xTimer: Timer?
+    var oTimer: Timer?
+    var stopTime = Date()
+    var startTime = Date()
+    var runXTime: TimeInterval = 0.0
+    var runOTime: TimeInterval = 0.0
     var blinkCnt = 0
     var blinkStatus = false
     
@@ -54,10 +60,6 @@ class TicTacToeViewController: UIViewController {
     private func startGame(){
         timer?.invalidate()
         clearPlayField()
-        reslabel.text = "O-Player"
-        if theGame.xStart {
-            reslabel.text = "X-Player"
-        }
         playAgianButton.isHidden = true
         yourTurnLabel.isHidden = false
         yourTurnLabel.text = "You start"
@@ -65,95 +67,22 @@ class TicTacToeViewController: UIViewController {
         oMoves.text = "0"
         xTime.text = "00:00"
         oTime.text = "00:00"
-    }
-    
-    @IBAction func clickPlayAgian(_ sender: UIButton) {
-        theGame.startNewGame()
-        startGame()
-    }
-    
-    @IBAction func tapp11(_ sender: UITapGestureRecognizer) {
-        if imageCompare(image1: img11.image!, isEqualTo: blankImg!) {
-            imageTapped(y: 0, x: 0)
-        }
-    }
-    
-    @IBAction func tapp12(_ sender: UITapGestureRecognizer) {
-        if imageCompare(image1: img12.image!, isEqualTo: blankImg!) {
-            imageTapped(y: 0, x: 1)
-        }
-    }
-    
-    @IBAction func tapp13(_ sender: UITapGestureRecognizer) {
-        if imageCompare(image1: img13.image!, isEqualTo: blankImg!) {
-            imageTapped(y: 0, x: 2)
-        }
-    }
-    
-    @IBAction func tapp21(_ sender: UITapGestureRecognizer) {
-        if imageCompare(image1: img21.image!, isEqualTo: blankImg!) {
-            imageTapped(y: 1, x: 0)
-        }
-    }
-    
-    @IBAction func tapp22(_ sender: UITapGestureRecognizer) {
-        if imageCompare(image1: img22.image!, isEqualTo: blankImg!) {
-            imageTapped(y: 1, x: 1)
-        }
-    }
-    
-    @IBAction func tapp23(_ sender: UITapGestureRecognizer) {
-        if imageCompare(image1: img23.image!, isEqualTo: blankImg!) {
-            imageTapped(y: 1, x: 2)
-        }
-    }
-    
-    @IBAction func tapp31(_ sender: UITapGestureRecognizer) {
-        if imageCompare(image1: img31.image!, isEqualTo: blankImg!) {
-            imageTapped(y: 2, x: 0)
-        }
-    }
-    
-    @IBAction func tapp32(_ sender: UITapGestureRecognizer) {
-        if imageCompare(image1: img32.image!, isEqualTo: blankImg!) {
-            imageTapped(y: 2, x: 1)
-        }
-    }
-    
-    @IBAction func tapp33(_ sender: UITapGestureRecognizer) {
-        if imageCompare(image1: img33.image!, isEqualTo: blankImg!) {
-            imageTapped(y: 2, x: 2)
-        }
-    }
-    
-    func imageCompare(image1: UIImage, isEqualTo image2: UIImage) -> Bool {
-        let data1: NSData = image1.pngData()! as NSData
-        let data2: NSData = image2.pngData()! as NSData
-        return data1.isEqual(data2)
-    }
-    
-    func imageTapped(y: Int, x: Int){
-        if !theGame.endGame {
-            yourTurnLabel.text = "Your Turn"
-            if theGame.nextMoveX(y: y, x: x) {
-                reslabel.text = "O - player"
-                let moves = theGame.playerMoves
-                xMoves.text = String(moves.xPlayer)
-                oMoves.text = String(moves.oPlayer)
-                cordMap[y][x].image = xImg
-                if theGame.endGame {
-                    gameEnded(winner: "X")
-                }
-            } else {
-                reslabel.text = "X - player"
-                let moves = theGame.playerMoves
-                xMoves.text = String(moves.xPlayer)
-                oMoves.text = String(moves.oPlayer)
-                cordMap[y][x].image = oImg
-                if theGame.endGame {
-                    gameEnded(winner: "O")
-                }
+        runXTime = 0.0
+        runOTime = 0.0
+        startTime = Date()
+        stopTime = Date()
+        if theGame.xStart {
+            reslabel.text = "X-Player"
+            if let oTimer = oTimer {
+                oTimer.invalidate()
             }
+            xTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: updateXTimeLabel(t:))
+        } else {
+            reslabel.text = "O-Player"
+            if let xTimer = xTimer {
+                xTimer.invalidate()
+            }
+            oTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: updateOTimeLabel(t:))
         }
     }
     
@@ -170,6 +99,8 @@ class TicTacToeViewController: UIViewController {
         let wins = theGame.playerWins
         xWins.text = String(wins.xPlayer)
         oWins.text = String(wins.oPlayer)
+        xTimer?.invalidate()
+        oTimer?.invalidate()
     }
     
     func blink(t: Timer? = nil){
@@ -193,7 +124,7 @@ class TicTacToeViewController: UIViewController {
         }
     }
     
-    func clearPlayField(){
+    private func clearPlayField(){
         for y in 0...2 {
             for x in 0...2 {
                 cordMap[y][x].image = blankImg
@@ -202,7 +133,165 @@ class TicTacToeViewController: UIViewController {
         }
     }
 
+    // Update X-Player time
+    private func updateXTimeLabel(t: Timer? = nil){
+        var rTime = runXTime
+        rTime += Date().timeIntervalSince(startTime)
+        xTime.text = converToTimeString(rTime)
+    }
+
+    // Update O-Player time
+    private func updateOTimeLabel(t: Timer? = nil){
+        var rTime = runOTime
+        rTime += Date().timeIntervalSince(stopTime)
+        oTime.text = converToTimeString(rTime)
+    }
+
+    // Covert seconds to MM:SS
+    private func converToTimeString(_ sek: Double) -> String {
+        var rc = ""
+        var sec = Int(sek)
+        var min = sec / 60
+        sec = sec % 60
+        min = min % 60
+        
+        if sec < 10 {
+            rc = ":0" + String(sec)
+        } else {
+            rc = ":" + String(sec)
+        }
+        
+        if min < 10 {
+            rc = "0" + String(min) + rc
+        } else {
+            rc = String(min) + rc
+        }
+        
+        return rc
+    }
+    
+//    ----------------------------------------------------------------
+//    |  Usear interaction                                            |
+//    ----------------------------------------------------------------
+    
+    // Click on button play again
+    @IBAction func clickPlayAgian(_ sender: UIButton) {
+        theGame.startNewGame()
+        startGame()
+    }
+    
+    //Click on matrix y:1 x:1
+    @IBAction func tapp11(_ sender: UITapGestureRecognizer) {
+        if imageCompare(image1: img11.image!, isEqualTo: blankImg!) {
+            imageTapped(y: 0, x: 0)
+        }
+    }
+    
+    //Click on matrix y:1 x:2
+    @IBAction func tapp12(_ sender: UITapGestureRecognizer) {
+        if imageCompare(image1: img12.image!, isEqualTo: blankImg!) {
+            imageTapped(y: 0, x: 1)
+        }
+    }
+    
+    //Click on matrix y:1 x:3
+    @IBAction func tapp13(_ sender: UITapGestureRecognizer) {
+        if imageCompare(image1: img13.image!, isEqualTo: blankImg!) {
+            imageTapped(y: 0, x: 2)
+        }
+    }
+    
+    //Click on matrix y:1 x:3
+    @IBAction func tapp21(_ sender: UITapGestureRecognizer) {
+        if imageCompare(image1: img21.image!, isEqualTo: blankImg!) {
+            imageTapped(y: 1, x: 0)
+        }
+    }
+    
+    //Click on matrix y:2 x:1
+    @IBAction func tapp22(_ sender: UITapGestureRecognizer) {
+        if imageCompare(image1: img22.image!, isEqualTo: blankImg!) {
+            imageTapped(y: 1, x: 1)
+        }
+    }
+    
+    //Click on matrix y:2 x:2
+    @IBAction func tapp23(_ sender: UITapGestureRecognizer) {
+        if imageCompare(image1: img23.image!, isEqualTo: blankImg!) {
+            imageTapped(y: 1, x: 2)
+        }
+    }
+    
+    //Click on matrix y:2 x:3
+    @IBAction func tapp31(_ sender: UITapGestureRecognizer) {
+        if imageCompare(image1: img31.image!, isEqualTo: blankImg!) {
+            imageTapped(y: 2, x: 0)
+        }
+    }
+    
+    //Click on matrix y:3 x:1
+    @IBAction func tapp32(_ sender: UITapGestureRecognizer) {
+        if imageCompare(image1: img32.image!, isEqualTo: blankImg!) {
+            imageTapped(y: 2, x: 1)
+        }
+    }
+    
+    //Click on matrix y:3 x:2
+    @IBAction func tapp33(_ sender: UITapGestureRecognizer) {
+        if imageCompare(image1: img33.image!, isEqualTo: blankImg!) {
+            imageTapped(y: 2, x: 2)
+        }
+    }
+    
+    //Click on matrix y:3 x:3
+    func imageCompare(image1: UIImage, isEqualTo image2: UIImage) -> Bool {
+        let data1: NSData = image1.pngData()! as NSData
+        let data2: NSData = image2.pngData()! as NSData
+        return data1.isEqual(data2)
+    }
+    
+    //Handeling user input
+    func imageTapped(y: Int, x: Int){
+        if !theGame.endGame {
+            yourTurnLabel.text = "Your Turn"
+            if theGame.nextMoveX(y: y, x: x) {
+                reslabel.text = "O - player"
+                let moves = theGame.playerMoves
+                xMoves.text = String(moves.xPlayer)
+                oMoves.text = String(moves.oPlayer)
+                cordMap[y][x].image = xImg
+                if let xTimer = xTimer {
+                    xTimer.invalidate()
+                }
+                stopTime = Date()
+                runXTime += stopTime.timeIntervalSince(startTime)
+                oTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: updateOTimeLabel(t:))
+                if theGame.endGame {
+                    gameEnded(winner: "X")
+                }
+            } else {
+                reslabel.text = "X - player"
+                let moves = theGame.playerMoves
+                xMoves.text = String(moves.xPlayer)
+                oMoves.text = String(moves.oPlayer)
+                cordMap[y][x].image = oImg
+                if let otimer = oTimer {
+                    otimer.invalidate()
+                }
+                startTime = Date()
+                runOTime += startTime.timeIntervalSince(stopTime)
+                xTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: updateXTimeLabel(t:))
+                if theGame.endGame {
+                    gameEnded(winner: "O")
+                }
+            }
+        }
+    }
+    
+    //Cleaning up timers
     deinit {
         timer?.invalidate()
+        xTimer?.invalidate()
+        oTimer?.invalidate()
     }
 }
