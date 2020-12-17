@@ -10,6 +10,8 @@ import Foundation
 class TicTackToeGame {
     private var isXstarting: Bool
     private var gameTurn: Int
+    private var xTurn: Int
+    private var oTurn: Int
     private var pMatrix: [[String]]
     private var wLine: [(y: Int, x: Int)]
     private var gameEnds: Bool
@@ -24,6 +26,20 @@ class TicTackToeGame {
         self.gameEnds = false
         self.xPlayerWins = 0
         self.oPlayerWins = 0
+        self.xTurn = 0
+        self.oTurn = 0
+    }
+    
+    var playerMoves: (xPlayer: Int, oPlayer: Int){
+        return (xTurn, oTurn)
+    }
+    
+    var xStart: Bool {
+        return isXstarting
+    }
+    
+    var playerWins: (xPlayer: Int, oPlayer: Int){
+        return (xPlayerWins, oPlayerWins)
     }
     
     var endGame: Bool {
@@ -36,6 +52,8 @@ class TicTackToeGame {
     
     func startNewGame(){
         gameTurn = 0
+        xTurn = 0
+        oTurn = 0
         resetMatrix()
         wLine = [(-1, -1), (-1, -1), (-1, -1)]
         gameEnds = false
@@ -58,9 +76,11 @@ class TicTackToeGame {
     private func nextMove(y: Int, x: Int, player: String = "X") -> Bool{
         pMatrix[y][x] = player
         if player == "X" {
+            xTurn += 1
             gameEnds = checkEndGame()
             return true
         }
+        oTurn += 1
         gameEnds = checkEndGame(xPLayer: false)
         return false
     }
@@ -107,6 +127,7 @@ class TicTackToeGame {
         }
 
         if gameTurn >= 9 {
+            isXstarting = !isXstarting
             return true
         }
         return false
@@ -115,8 +136,10 @@ class TicTackToeGame {
     private func addWins(xPLayer: Bool){
         if xPLayer {
             xPlayerWins += 1
+            isXstarting = false
         } else {
             oPlayerWins += 1
+            isXstarting = true
         }
     }
 }

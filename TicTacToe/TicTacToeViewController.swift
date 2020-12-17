@@ -22,6 +22,15 @@ class TicTacToeViewController: UIViewController {
     @IBOutlet weak var img32: UIImageView!
     @IBOutlet weak var img33: UIImageView!
     @IBOutlet weak var reslabel: UILabel!
+    @IBOutlet weak var computerLabel: UILabel!
+    @IBOutlet weak var xWins: UILabel!
+    @IBOutlet weak var oWins: UILabel!
+    @IBOutlet weak var xMoves: UILabel!
+    @IBOutlet weak var oMoves: UILabel!
+    @IBOutlet weak var xTime: UILabel!
+    @IBOutlet weak var oTime: UILabel!
+    @IBOutlet weak var yourTurnLabel: UILabel!
+    @IBOutlet weak var playAgianButton: UIButton!
     var cordMap = [[UIImageView]]()
     var theGame = TicTackToeGame()
     var timer: Timer?
@@ -31,10 +40,36 @@ class TicTacToeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         cordMap = [[img11, img12, img13], [img21, img22, img23], [img31, img32, img33]]
+//        let theGame = TicTackToeGame()
+        xWins.text = "0"
+        oWins.text = "0"
+        startGame()
+        if noOfPlayers == 1 {
+            computerLabel.isHidden = false
+        } else {
+            computerLabel.isHidden = true
+        }
+    }
+    
+    private func startGame(){
+        timer?.invalidate()
         clearPlayField()
-        let theGame = TicTackToeGame()
+        reslabel.text = "O-Player"
+        if theGame.xStart {
+            reslabel.text = "X-Player"
+        }
+        playAgianButton.isHidden = true
+        yourTurnLabel.isHidden = false
+        yourTurnLabel.text = "You start"
+        xMoves.text = "0"
+        oMoves.text = "0"
+        xTime.text = "00:00"
+        oTime.text = "00:00"
+    }
+    
+    @IBAction func clickPlayAgian(_ sender: UIButton) {
         theGame.startNewGame()
-        reslabel.text = ""
+        startGame()
     }
     
     @IBAction func tapp11(_ sender: UITapGestureRecognizer) {
@@ -99,12 +134,21 @@ class TicTacToeViewController: UIViewController {
     
     func imageTapped(y: Int, x: Int){
         if !theGame.endGame {
+            yourTurnLabel.text = "Your Turn"
             if theGame.nextMoveX(y: y, x: x) {
+                reslabel.text = "O - player"
+                let moves = theGame.playerMoves
+                xMoves.text = String(moves.xPlayer)
+                oMoves.text = String(moves.oPlayer)
                 cordMap[y][x].image = xImg
                 if theGame.endGame {
                     gameEnded(winner: "X")
                 }
             } else {
+                reslabel.text = "X - player"
+                let moves = theGame.playerMoves
+                xMoves.text = String(moves.xPlayer)
+                oMoves.text = String(moves.oPlayer)
                 cordMap[y][x].image = oImg
                 if theGame.endGame {
                     gameEnded(winner: "O")
@@ -118,9 +162,14 @@ class TicTacToeViewController: UIViewController {
         if winningLine[0].x == -1 {
             reslabel.text = "Game ended with a Draw"
         } else {
-            reslabel.text = "\(winner)- Won!!"
+            reslabel.text = "\(winner) - player Won!!"
             timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: blink(t:))
         }
+        yourTurnLabel.isHidden = true
+        playAgianButton.isHidden = false
+        let wins = theGame.playerWins
+        xWins.text = String(wins.xPlayer)
+        oWins.text = String(wins.oPlayer)
     }
     
     func blink(t: Timer? = nil){
@@ -148,6 +197,7 @@ class TicTacToeViewController: UIViewController {
         for y in 0...2 {
             for x in 0...2 {
                 cordMap[y][x].image = blankImg
+                cordMap[y][x].isHidden = false
             }
         }
     }
