@@ -10,9 +10,13 @@ import Foundation
 class TicTackToeGame {
     private var isXstarting: Bool
     private var gameTurn: Int
+    private var xTurn: Int
+    private var oTurn: Int
     private var pMatrix: [[String]]
     private var wLine: [(y: Int, x: Int)]
     private var gameEnds: Bool
+    private var xPlayerWins: Int
+    private var oPlayerWins: Int
     
     init(isXstarting: Bool = true){
         self.isXstarting = isXstarting
@@ -20,6 +24,22 @@ class TicTackToeGame {
         self.pMatrix = [["", "", ""], ["", "", ""], ["", "", ""]]
         self.wLine = [(-1, -1), (-1, -1), (-1, -1)]
         self.gameEnds = false
+        self.xPlayerWins = 0
+        self.oPlayerWins = 0
+        self.xTurn = 0
+        self.oTurn = 0
+    }
+    
+    var playerMoves: (xPlayer: Int, oPlayer: Int){
+        return (xTurn, oTurn)
+    }
+    
+    var xStart: Bool {
+        return isXstarting
+    }
+    
+    var playerWins: (xPlayer: Int, oPlayer: Int){
+        return (xPlayerWins, oPlayerWins)
     }
     
     var endGame: Bool {
@@ -32,6 +52,8 @@ class TicTackToeGame {
     
     func startNewGame(){
         gameTurn = 0
+        xTurn = 0
+        oTurn = 0
         resetMatrix()
         wLine = [(-1, -1), (-1, -1), (-1, -1)]
         gameEnds = false
@@ -53,12 +75,14 @@ class TicTackToeGame {
     
     private func nextMove(y: Int, x: Int, player: String = "X") -> Bool{
         pMatrix[y][x] = player
-        gameEnds = checkEndGame()
         if player == "X" {
+            xTurn += 1
+            gameEnds = checkEndGame()
             return true
-        } else {
-            return false
         }
+        oTurn += 1
+        gameEnds = checkEndGame(xPLayer: false)
+        return false
     }
     
     private func resetMatrix(){
@@ -69,17 +93,19 @@ class TicTackToeGame {
         }
     }
     
-    private func checkEndGame() -> Bool{
+    private func checkEndGame(xPLayer: Bool = true) -> Bool{
         for i in 0...2 {
             if pMatrix[i][0] != "" {
                 if pMatrix[i][0] == pMatrix[i][1] && pMatrix[i][0] == pMatrix[i][2]{
                     wLine = [(i, 0), (i, 1), (i, 2)]
+                    addWins(xPLayer: xPLayer)
                     return true
                 }
             }
             if pMatrix[0][i] != "" {
                 if pMatrix[0][i] == pMatrix[1][i] && pMatrix[0][i] == pMatrix[2][i]{
                     wLine = [(0, i), (1, i), (2, i)]
+                    addWins(xPLayer: xPLayer)
                     return true
                 }
             }
@@ -88,19 +114,32 @@ class TicTackToeGame {
         if pMatrix[0][0] != "" {
             if pMatrix[0][0] == pMatrix[1][1] && pMatrix[0][0] == pMatrix[2][2]{
                 wLine = [(0, 0), (1, 1), (2, 2)]
+                addWins(xPLayer: xPLayer)
                 return true
             }
         }
         if pMatrix[0][2] != "" {
             if pMatrix[0][2] == pMatrix[1][1] && pMatrix[0][2] == pMatrix[2][0]{
                 wLine = [(0, 2), (1, 1), (2, 0)]
+                addWins(xPLayer: xPLayer)
                 return true
             }
         }
 
         if gameTurn >= 9 {
+            isXstarting = !isXstarting
             return true
         }
         return false
+    }
+    
+    private func addWins(xPLayer: Bool){
+        if xPLayer {
+            xPlayerWins += 1
+            isXstarting = false
+        } else {
+            oPlayerWins += 1
+            isXstarting = true
+        }
     }
 }
