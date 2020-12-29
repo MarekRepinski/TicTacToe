@@ -17,6 +17,7 @@ class TicTackToeGame {
     private var gameEnds: Bool
     private var xPlayerWins: Int
     private var oPlayerWins: Int
+    private var gamePath: Int
     
     init(isXstarting: Bool = true){
         self.isXstarting = isXstarting
@@ -28,6 +29,7 @@ class TicTackToeGame {
         self.oPlayerWins = 0
         self.xTurn = 0
         self.oTurn = 0
+        self.gamePath = 0
     }
     
     var playerMoves: (xPlayer: Int, oPlayer: Int){
@@ -141,5 +143,272 @@ class TicTackToeGame {
             oPlayerWins += 1
             isXstarting = true
         }
+    }
+    
+    func compPlayerMove() -> (y: Int, x: Int){
+        var pos = (-1, -1)
+        if !isXstarting {
+            switch gameTurn {
+            case 0:
+                return (2, 0)
+            case 2:
+                if pMatrix[0][2] == "X" {
+                    gamePath = 1
+                    return (0, 0)
+                } else if pMatrix[0][0] == "X" || pMatrix[2][2] == "X" {
+                    gamePath = 2
+                    return (0, 2)
+                } else if pMatrix[1][1] == "X" {
+                    gamePath = 3
+                    return (0, 2)
+                } else {
+                    gamePath = 4
+                    return (1, 1)
+                }
+            case 4:
+                pos = canWinLose(token: "O")
+                if pos.0 != -1 {
+                    return pos
+                } else if gamePath == 1 {
+                    return (2, 2)
+                } else if gamePath == 2 {
+                    if pMatrix[0][0] == "X" {
+                        return (2, 2)
+                    }
+                    return (0, 0)
+                } else if gamePath == 3 {
+                    return canWinLose(token: "X")
+                } else if gamePath == 4 {
+                    if pMatrix[2][1] != "X" {
+                        return (2, 2)
+                    }
+                    return (0, 0)
+                }
+            default:
+                pos = canWinLose(token: "O")
+                if pos.0 != -1 {
+                    return pos
+                }
+                pos = canWinLose(token: "X")
+                if pos.0 != -1 {
+                    return pos
+                }
+                return randPos()
+            }
+        } else {
+            switch gameTurn {
+            case 1:
+                if pMatrix[1][1] == "X" {
+                    gamePath = 1
+                    return (2, 0)
+                } else {
+                    if pMatrix[0][0] == "X" || pMatrix[0][2] == "X" ||  pMatrix[2][0] == "X" ||  pMatrix[2][2] == "X" {
+                        gamePath = 2
+                    } else {
+                        gamePath = 3
+                    }
+                    return (1, 1)
+                }
+            case 3:
+                pos = canWinLose(token: "O")
+                if pos.0 != -1 {
+                    return pos
+                }
+                pos = canWinLose(token: "X")
+                if pos.0 != -1 {
+                    return pos
+                } else if gamePath == 1 {
+                    return (2, 2)
+                } else if gamePath == 2 {
+                    if pMatrix[0][0] == "X" && pMatrix[2][2] == "X" || pMatrix[0][2] == "X" && pMatrix[2][2] == "X"{
+                        return (0, 1)
+                    } else {
+                        if pMatrix[0][0] == "X"{
+                            if pMatrix[1][2] == "X"{
+                                return (0, 1)
+                            } else {
+                                return (1, 0)
+                            }
+                        } else if pMatrix[0][2] == "X"{
+                            if pMatrix[2][1] == "X"{
+                                return (1, 2)
+                            } else {
+                                return (0, 1)
+                            }
+                        } else if pMatrix[2][0] == "X"{
+                            if pMatrix[0][1] == "X"{
+                                return (1, 0)
+                            } else {
+                                return (2, 1)
+                            }
+                        } else {
+                            if pMatrix[1][0] == "X"{
+                                return (2, 1)
+                            } else {
+                                return (1, 2)
+                            }
+                        }
+                    }
+                } else if gamePath == 3 {
+                    if pMatrix[0][1] == "X" {
+                        if pMatrix[2][1] == "X" {
+                            gamePath = 4
+                            return (1, 0)
+                        } else if pMatrix[1][0] == "X" {
+                            return (0, 0)
+                        } else if pMatrix[1][2] == "X" {
+                            return (0, 2)
+                        } else if pMatrix[2][0] == "X" {
+                            return (1, 0)
+                        } else if pMatrix[2][2] == "X" {
+                            return (1, 2)
+                        }
+                    } else if pMatrix[1][0] == "X" {
+                        if pMatrix[1][2] == "X" {
+                            gamePath = 4
+                            return (0, 1)
+                        } else if pMatrix[2][1] == "X" {
+                            return (2, 0)
+                        } else if pMatrix[0][2] == "X" {
+                            return (0, 1)
+                        } else if pMatrix[2][2] == "X" {
+                            return (2, 1)
+                        }
+                    } else if pMatrix[1][2] == "X" {
+                        if pMatrix[2][1] == "X" {
+                            return (2, 2)
+                        } else if pMatrix[0][0] == "X" {
+                            return (0, 1)
+                        } else if pMatrix[2][0] == "X" {
+                            return (2, 1)
+                        }
+                    } else if pMatrix[2][1] == "X" {
+                        if pMatrix[0][0] == "X" {
+                            return (1, 0)
+                        } else if pMatrix[0][2] == "X" {
+                            return (1, 2)
+                        }
+                    }
+                }
+                pos = canWinLose(token: "O", pressure: true)
+                if pos.0 != -1 {
+                    return pos
+                }
+                return randPos()
+            case 5:
+                pos = canWinLose(token: "O")
+                if pos.0 != -1 {
+                    return pos
+                }
+                pos = canWinLose(token: "X")
+                if pos.0 != -1 {
+                    return pos
+                }
+                if gamePath == 4 {
+                    return (0, 0)
+                } else {
+                    pos = canWinLose(token: "O", pressure: true)
+                    if pos.0 != -1 {
+                        return pos
+                    }
+                    return randPos()
+                }
+            default:
+                pos = canWinLose(token: "O")
+                if pos.0 != -1 {
+                    return pos
+                }
+                pos = canWinLose(token: "X")
+                if pos.0 != -1 {
+                    return pos
+                }
+                pos = canWinLose(token: "O", pressure: true)
+                if pos.0 != -1 {
+                    return pos
+                }
+                return randPos()
+            }
+        }
+        return randPos()
+    }
+    
+    private func randPos() -> (y: Int, x: Int){
+        var cnt = 0
+        var rc = (-1, -1)
+        var yTemp = 0
+        var xTemp = 0
+        
+        while rc.0 == -1 && cnt < 10000 {
+            cnt += 1
+            yTemp = Int.random(in: 0...2)
+            xTemp = Int.random(in: 0...2)
+            if pMatrix[yTemp][xTemp] == "" {
+                rc = (yTemp, xTemp)
+            }
+        }
+        return rc
+    }
+    
+    private func canWinLose(token: String, pressure: Bool = false) -> (y: Int, x: Int){
+        var pos = -1
+        for i in 0...2 {
+            pos = canWinLoseCheck(pMatrix[i][0], pMatrix[i][1], pMatrix[i][2], token, pressure: pressure)
+            if pos != -1 {
+                return (i, pos)
+            }
+            pos = canWinLoseCheck(pMatrix[0][i], pMatrix[1][i], pMatrix[2][i], token, pressure: pressure)
+            if pos != -1 {
+                return (pos, i)
+            }
+        }
+        
+        //Diagonal check
+        pos = canWinLoseCheck(pMatrix[0][0], pMatrix[1][1], pMatrix[2][2], token, pressure: pressure)
+        if pos != -1 {
+            return (pos, pos)
+        }
+        pos = canWinLoseCheck(pMatrix[0][2], pMatrix[1][1], pMatrix[2][0], token, pressure: pressure)
+        if pos != -1 {
+            return (pos, (2 - pos))
+        }
+
+        return (-1, -1)
+    }
+    
+    private func canWinLoseCheck(_ a: String, _ b: String, _ c: String, _ check: String, pressure: Bool = false) -> Int {
+        var hit = 0
+        var empty = 0
+        var pos = 0
+        
+        if a == check{
+            hit += 1
+        }
+        if b == check{
+            hit += 1
+        }
+        if c == check{
+            hit += 1
+        }
+        if a == ""{
+            empty += 1
+        }
+        if b == ""{
+            pos = 1
+            empty += 1
+        }
+        if c == ""{
+            pos = 2
+            empty += 1
+        }
+        if !pressure {
+            if hit == 2 && empty == 1 {
+                return pos
+            }
+        } else {
+            if hit == 1 && empty == 2 {
+                return pos
+            }
+        }
+        return -1
     }
 }
