@@ -32,6 +32,10 @@ class ViewController: UIViewController {
             let destinationVC = segue.destination as! TicTacToeViewController
             destinationVC.noOfPlayers = noOfPlayers
         }
+        if segue.identifier == segueToGameOneP {
+            let destinationVC = segue.destination as! TicTacToeViewController
+            destinationVC.noOfPlayers = noOfPlayers
+        }
     }
     
     @IBAction func unwindToStartView(segue: UIStoryboardSegue){}

@@ -145,6 +145,11 @@ class TicTacToeViewController: UIViewController {
         var rTime = runOTime
         rTime += Date().timeIntervalSince(stopTime)
         oTime.text = converToTimeString(rTime)
+        // If one player, make a computermove after 1 sec
+        if noOfPlayers == 1 && Date().timeIntervalSince(stopTime) >= 1 {
+            let nextCompMove = theGame.compPlayerMove()
+            imageTapped(y: nextCompMove.0, x: nextCompMove.1)
+        }
     }
 
     // Covert seconds to MM:SS
