@@ -223,6 +223,7 @@ class TicTackToeGame {
                     if pMatrix[0][0] == "X" && pMatrix[2][2] == "X" || pMatrix[0][2] == "X" && pMatrix[2][2] == "X"{
                         return (0, 1)
                     } else {
+                        gamePath = 5
                         if pMatrix[0][0] == "X"{
                             if pMatrix[1][2] == "X"{
                                 return (0, 1)
@@ -306,6 +307,17 @@ class TicTackToeGame {
                 }
                 if gamePath == 4 {
                     return (0, 0)
+                } else if gamePath == 5 {
+                    if pMatrix[0][2] == "X" && pMatrix[0][1] == "" || pMatrix[2][0] == "X" && pMatrix[1][0] == "" {
+                        return (0,0)
+                    }
+                    if pMatrix[0][0] == "X" && pMatrix[0][1] == "" || pMatrix[2][2] == "X" && pMatrix[1][2] == "" {
+                        return (0,2)
+                    }
+                    if pMatrix[0][0] == "X" && pMatrix[1][0] == "" || pMatrix[2][2] == "X" && pMatrix[2][1] == "" {
+                        return (2,0)
+                    }
+                    return (2,2)
                 } else {
                     pos = canWinLose(token: "O", pressure: true)
                     if pos.0 != -1 {

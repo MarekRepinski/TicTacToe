@@ -8,8 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let segueToGameTwoP = "segueToGameTwoP"
-    let segueToGameOneP = "segueToGameTwoP"
+    let segueToGame = "segueToGameTwoP"
     var noOfPlayers = 0
 
     override func viewDidLoad() {
@@ -19,20 +18,16 @@ class ViewController: UIViewController {
 
     @IBAction func onePlayer(_ sender: UIButton) {
         noOfPlayers = 1
-        performSegue(withIdentifier: segueToGameOneP, sender: self)
+        performSegue(withIdentifier: segueToGame, sender: self)
     }
     
     @IBAction func twoPlayer(_ sender: UIButton) {
         noOfPlayers = 2
-        performSegue(withIdentifier: segueToGameTwoP, sender: self)
+        performSegue(withIdentifier: segueToGame, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueToGameTwoP {
-            let destinationVC = segue.destination as! TicTacToeViewController
-            destinationVC.noOfPlayers = noOfPlayers
-        }
-        if segue.identifier == segueToGameOneP {
+        if segue.identifier == segueToGame {
             let destinationVC = segue.destination as! TicTacToeViewController
             destinationVC.noOfPlayers = noOfPlayers
         }
