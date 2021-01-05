@@ -169,6 +169,10 @@ class TicTackToeGame {
                 pos = canWinLose(token: "O")
                 if pos.0 != -1 {
                     return pos
+                }
+                pos = canWinLose(token: "X")
+                if pos.0 != -1 {
+                        return pos
                 } else if gamePath == 1 {
                     return (2, 2)
                 } else if gamePath == 2 {

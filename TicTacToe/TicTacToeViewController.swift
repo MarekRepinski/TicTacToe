@@ -31,7 +31,7 @@ class TicTacToeViewController: UIViewController {
     @IBOutlet weak var oTime: UILabel!
     @IBOutlet weak var yourTurnLabel: UILabel!
     @IBOutlet weak var playAgianButton: UIButton!
-    var cordMap = [[UIImageView]]()
+    var cordMap = [[UIImageView]]()                 // 2-D array of TicTacToe pictures
     var theGame = TicTackToeGame()
     var timer: Timer?
     var xTimer: Timer?
@@ -46,7 +46,6 @@ class TicTacToeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         cordMap = [[img11, img12, img13], [img21, img22, img23], [img31, img32, img33]]
-//        let theGame = TicTackToeGame()
         xWins.text = "0"
         oWins.text = "0"
         startGame()
@@ -86,6 +85,7 @@ class TicTacToeViewController: UIViewController {
         }
     }
     
+    // Handle end of the game
     func gameEnded(winner: String){
         let winningLine = theGame.winningLine
         if winningLine[0].x == -1 {
@@ -103,6 +103,7 @@ class TicTacToeViewController: UIViewController {
         oTimer?.invalidate()
     }
     
+    // Blink the winning line
     func blink(t: Timer? = nil){
         blinkCnt += 1
         for wl in theGame.winningLine {
