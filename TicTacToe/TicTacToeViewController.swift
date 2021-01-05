@@ -145,6 +145,11 @@ class TicTacToeViewController: UIViewController {
         var rTime = runOTime
         rTime += Date().timeIntervalSince(stopTime)
         oTime.text = converToTimeString(rTime)
+        // If one player, make a computermove after 1 sec
+        if noOfPlayers == 1 && Date().timeIntervalSince(stopTime) >= 1 {
+            let nextCompMove = theGame.compPlayerMove()
+            imageTapped(y: nextCompMove.0, x: nextCompMove.1)
+        }
     }
 
     // Covert seconds to MM:SS
@@ -201,49 +206,49 @@ class TicTacToeViewController: UIViewController {
         }
     }
     
-    //Click on matrix y:1 x:3
+    //Click on matrix y:2 x:1
     @IBAction func tapp21(_ sender: UITapGestureRecognizer) {
         if imageCompare(image1: img21.image!, isEqualTo: blankImg!) {
             imageTapped(y: 1, x: 0)
         }
     }
     
-    //Click on matrix y:2 x:1
+    //Click on matrix y:2 x:2
     @IBAction func tapp22(_ sender: UITapGestureRecognizer) {
         if imageCompare(image1: img22.image!, isEqualTo: blankImg!) {
             imageTapped(y: 1, x: 1)
         }
     }
     
-    //Click on matrix y:2 x:2
+    //Click on matrix y:2 x:3
     @IBAction func tapp23(_ sender: UITapGestureRecognizer) {
         if imageCompare(image1: img23.image!, isEqualTo: blankImg!) {
             imageTapped(y: 1, x: 2)
         }
     }
     
-    //Click on matrix y:2 x:3
+    //Click on matrix y:3 x:1
     @IBAction func tapp31(_ sender: UITapGestureRecognizer) {
         if imageCompare(image1: img31.image!, isEqualTo: blankImg!) {
             imageTapped(y: 2, x: 0)
         }
     }
     
-    //Click on matrix y:3 x:1
-    @IBAction func tapp32(_ sender: UITapGestureRecognizer) {
+    //Click on matrix y:3 x:3
+   @IBAction func tapp32(_ sender: UITapGestureRecognizer) {
         if imageCompare(image1: img32.image!, isEqualTo: blankImg!) {
             imageTapped(y: 2, x: 1)
         }
     }
     
-    //Click on matrix y:3 x:2
+    //Click on matrix y:3 x:3
     @IBAction func tapp33(_ sender: UITapGestureRecognizer) {
         if imageCompare(image1: img33.image!, isEqualTo: blankImg!) {
             imageTapped(y: 2, x: 2)
         }
     }
-    
-    //Click on matrix y:3 x:3
+
+    //Compere if two images are the same
     func imageCompare(image1: UIImage, isEqualTo image2: UIImage) -> Bool {
         let data1: NSData = image1.pngData()! as NSData
         let data2: NSData = image2.pngData()! as NSData
