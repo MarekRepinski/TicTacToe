@@ -1,7 +1,7 @@
 //
 //  TicTackToeGame.swift
 //  TicTacToe
-//  Main app (Model)
+//  Game class (Model)
 //
 //  Created by Marek Repinski on 2020-12-16.
 //
