@@ -1,6 +1,7 @@
 //
 //  TicTacToeViewController.swift
 //  TicTacToe
+//  Main app controller
 //
 //  Created by Marek Repinski on 2020-12-15.
 //
@@ -8,7 +9,7 @@
 import UIKit
 
 class TicTacToeViewController: UIViewController {
-    var noOfPlayers = 0
+    var noOfPlayers = 0                             //1 or 2 player
     let blankImg = UIImage(named: "blank")
     let xImg = UIImage(named: "x")
     let oImg = UIImage(named: "o")
@@ -32,16 +33,16 @@ class TicTacToeViewController: UIViewController {
     @IBOutlet weak var yourTurnLabel: UILabel!
     @IBOutlet weak var playAgianButton: UIButton!
     var cordMap = [[UIImageView]]()                 // 2-D array of TicTacToe pictures
-    var theGame = TicTackToeGame()
-    var timer: Timer?
-    var xTimer: Timer?
-    var oTimer: Timer?
-    var stopTime = Date()
-    var startTime = Date()
-    var runXTime: TimeInterval = 0.0
-    var runOTime: TimeInterval = 0.0
-    var blinkCnt = 0
-    var blinkStatus = false
+    var theGame = TicTackToeGame()                  // Main game
+    var timer: Timer?                               // Timer for blinking winning row
+    var xTimer: Timer?                              // Timer for X-player
+    var oTimer: Timer?                              // Timer for O-player
+    var stopTime = Date()                           // Stop X-player clock, start O-player clock
+    var startTime = Date()                          // Stop O-player clock, start X-player clock
+    var runXTime: TimeInterval = 0.0                // Count sec for X-player
+    var runOTime: TimeInterval = 0.0                // Count sec for O-player
+    var blinkCnt = 0                                // used by function "blink"
+    var blinkStatus = false                         // used by function "blink"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,7 @@ class TicTacToeViewController: UIViewController {
         }
     }
     
+    //Start first game
     private func startGame(){
         timer?.invalidate()
         clearPlayField()
@@ -125,6 +127,7 @@ class TicTacToeViewController: UIViewController {
         }
     }
     
+    // Set blank images in matrix
     private func clearPlayField(){
         for y in 0...2 {
             for x in 0...2 {

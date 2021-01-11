@@ -1,6 +1,7 @@
 //
 //  ViewController.swift
 //  TicTacToe
+//  Controller to first page.
 //
 //  Created by Marek Repinski on 2020-12-15.
 //
